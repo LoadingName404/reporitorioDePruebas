@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="es">
     <head>
-        <title>Title</title>
+        <title>Estanes</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -20,13 +20,18 @@
     </head>
 
     <body>
-        <header>
-            <!-- place navbar here -->
+        <header class="text-center bg-secondary">
+            <h1>Estantes:</h1>
+            <a href="#" class="btn btn-success btn-lg text-white">Añadir nuevo estante</a>
+            <br>
+            <br>
         </header>
         <main>
-            <br><br><br>
-            <div class="text-center">
-                <a href="{% static 'explosion.gif' %}" class="btn btn-primary">no pulsar</a>
+            <br>
+            <div class="container">
+            {% for e in estantes %}
+            <a href="{% url 'estante' e.id %}" class="btn btn-warning btn-lg text-dark">Estante {{ e.numero }}</a>
+            {% endfor %}
             </div>
         </main>
         <footer>
