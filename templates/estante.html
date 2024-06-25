@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="es">
     <head>
-        <title>Estante #</title>
+        <title>Estante {{ estante.numero }}</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -23,7 +23,7 @@
     <body>
         <header class="bg-secondary text-center">
             <h1>Estante {{ estante.numero }}</h1>
-            <a class="btn btn-primary btn-lg text-white" href="#">Editar numero</a>
+            <a class="btn btn-primary btn-lg text-white" href="{% url 'update_estante' estante.id %}">Editar numero</a>
             <a class="btn btn-danger btn-lg text-white" href="{% url 'delete_estante' estante.id %}">Borrar estante</a>
             <br>
             <br>

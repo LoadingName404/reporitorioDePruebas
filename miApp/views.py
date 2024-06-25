@@ -33,8 +33,22 @@ def create_estante(req):
     return render(req, 'cu_estante.html', data)
 
 
-def update_estante(request, e_id):
-    pass
+def update_estante(req, e_id):
+    estante = Estante.objects.get(id=e_id)
+    form = FormEstante(instance=estante)
+
+    if req.method == "POST":
+        form = FormEstante(req.POST, instance=estante)
+        if form.is_valid():
+            try:
+                estante.save()
+                messages.success(req, f'Se edito el numero del estante {estante.numero} correctamente.')
+                return redirect(f'/estante/{e_id}')
+            except Exception as e:
+                messages.error(req, f'No se pudo cambiar el numero del estante. Error: {str(e)}')
+
+    data = {'form': form, 'accion':'Editar', 'desc':'Cambia el numero del estante al que desea:'}
+    return render(req, 'cu_estante.html', data)
 
 def delete_estante(req, e_id):
     estante = Estante.objects.get(id=e_id)
@@ -51,7 +65,6 @@ def create_producto(req, e_id):
     if req.method == "POST":
         try:
             form = FormProducto(req.POST)
-            print(form)
             if form.is_valid():
                 form.save()
                 producto = Producto.objects.last()
@@ -63,8 +76,30 @@ def create_producto(req, e_id):
     data = {'form': form, 'accion': 'Agregar', 'descripcion': 'Agregue el numero del estante nuevo que desea agregar.'}
     return render(req, 'cu_producto.html', data)
 
-def update_producto(request, p_id):
-    pass
+def update_producto(req, p_id):
+    producto = Producto.objects.get(id=p_id)
+    form = FormProducto(instance=producto)
 
-def delete_producto(request, p_id):
-    pass
+    if req.method == "POST":
+        form = FormProducto(req.POST, instance=producto)
+        if form.is_valid():
+            try:
+                producto.save()
+                messages.success(req, f'Se edito el producto {producto.nombre} correctamente.')
+                return redirect(f'/estante/{producto.estante}')
+            except Exception as e:
+                messages.error(req, f'No se pudo editar el producto. Error: {str(e)}')
+            
+
+    data = {'form': form, 'accion':'Editar', 'desc':'Modifique los datos del productos que decia cambiar:'}
+    return render(req, 'cu_producto.html', data)
+
+def delete_producto(req, p_id):
+    producto = Producto.objects.get(id=p_id)
+    try:
+        producto.delete()
+        messages.success(req, f'Se elimino el producto {producto.nombre} correctamente.')
+    except Exception as e:
+        messages.error(req, f'No se pudo eliminar el producto. Error: {str(e)}')
+    return redirect(f'/estante/{producto.estante}')
+
