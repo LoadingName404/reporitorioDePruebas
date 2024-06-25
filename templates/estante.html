@@ -24,14 +24,23 @@
         <header class="bg-secondary text-center">
             <h1>Estante {{ estante.numero }}</h1>
             <a class="btn btn-primary btn-lg text-white" href="#">Editar numero</a>
-            <a class="btn btn-danger btn-lg text-white" href="#">Borrar estante</a>
+            <a class="btn btn-danger btn-lg text-white" href="{% url 'delete_estante' estante.id %}">Borrar estante</a>
             <br>
             <br>
         </header>
         <main>
+            <br>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <br>
             <div class="container">
             <br>
-            <a class="btn btn-success btn-lg text-white" href="#">Añadir producto al estante {{ estante.numero }}</a>
+            <a class="btn btn-success btn-lg text-white" href="{% url 'create_producto' estante.id %}">Añadir producto al estante {{ estante.numero }}</a>
             <table class="table">
                 <thead>
                     <tr>
@@ -48,8 +57,8 @@
                             <td>{{ p.precio }}</td>
                             <td>{{ p.fecha_vencimiento }}</td>
                             <td>
-                                <a class="text-danger" href="#"><i class="bi bi-trash"></i></a>
-                                <a href="#"><i class="bi bi-pencil"></i></a>
+                                <a href="{% url 'update_producto' p.id %}"><i class="bi bi-pencil"></i></a>
+                                <a class="text-danger" href="{% url 'delete_producto' p.id %}"><i class="bi bi-trash"></i></a>
                             </td>
                         </tr>
                     {% endfor %}

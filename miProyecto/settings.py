@@ -77,14 +77,24 @@ WSGI_APPLICATION = 'miProyecto.wsgi.application'
 
 DATABASES = {
     "default": {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3'
-        "ENGINE": "django.db.backends.mysql",
-        'HOST': '192.168.1.83',
-        'PORT': '3306',
-        'NAME': 'DBEpica',
-        'USER': 'nielol',
-        'PASSWORD': '9574'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3'
+        
+        ### base de datos que tengo en casa ###
+        #"ENGINE": "django.db.backends.mysql",
+        #'HOST': '192.168.1.83',
+        #'PORT': '3306',
+        #'NAME': 'DBEpica',
+        #'USER': 'nielol',
+        #'PASSWORD': '9574'
+        
+        ###     base de datos en xampp      ###
+        #"ENGINE": "django.db.backends.mysql",
+        #'HOST': 'localhost',
+        #'PORT': '3306',
+        #'NAME': 'DBEpica',
+        #'USER': 'root',
+        #'PASSWORD': 'pass'
     }
 }
 

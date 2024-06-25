@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="es">
     <head>
-        <title>Estanes</title>
+        <title>{{ accion }} estante</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -17,12 +17,13 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     </head>
 
     <body>
-        <header class="text-center bg-secondary">
-            <h1>Estantes:</h1>
-            <a href="{% url 'create_estante' %}" class="btn btn-success btn-lg text-white">Añadir nuevo estante</a>
+        <header class="bg-secondary text-center">
+            <h1>{{ accion }} estante</h1>
+            <h4>{{ descripcion }}</h4>
             <br>
             <br>
         </header>
@@ -37,9 +38,14 @@
             {% endif %}
             <br>
             <div class="container">
-                {% for e in estantes %}
-                <a href="{% url 'estante' e.id %}" class="btn btn-warning btn-lg text-dark">Estante {{ e.numero }}</a>
-                {% endfor %}
+                {% block content %}
+                    <form method='POST'>
+                        {% csrf_token %}
+                        {{ form }}
+                        <br>
+                        <button type="submit" class="btn btn-success btn-lg text-white">Agregar</button><a class="btn btn-warning btn-lg text-dark" href="{% url 'index' %}">Cancelar</a>
+                    </form>
+                {% endblock %}
             </div>
         </main>
         <footer>
