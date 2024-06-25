@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-hw!uwv^wttf%q7fqv8z@hoh5(2h$6udu1&at$gdcmt)k5z=6!5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['chukman.online']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -76,9 +76,15 @@ WSGI_APPLICATION = 'miProyecto.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3'
+        "ENGINE": "django.db.backends.mysql",
+        'HOST': '192.168.1.83',
+        'PORT': '3306',
+        'NAME': 'DBEpica',
+        'USER': 'nielol',
+        'PASSWORD': '9574'
     }
 }
 
@@ -105,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-cl'
 
 TIME_ZONE = 'UTC'
 
